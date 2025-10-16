@@ -1,0 +1,19 @@
+name: inspect_edf
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12.10
+  - spyder=6.0.*
+  - numpy=2.2.*
+  - pandas=2.2.*
+  - mne=1.9.*
+  - yasa=0.6.*
+  - voila=0.5.*
+  - notebook=7.4.*
+  - chardet=5.2.*
+  - ipyfilechooser=0.6.*
+  - ipython=8.36.*
+  - ipywidgets=8.1.*
+  - ipykernel=6.29.*
+  - tk=8.6.*
+  - pip
