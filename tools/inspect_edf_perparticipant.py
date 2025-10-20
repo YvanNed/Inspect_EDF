@@ -271,8 +271,10 @@ with open(f"{summary_path}/EDF_perParticipant_report.html", "w", encoding="utf-8
             
             #######################################################################
             # extract EEG info
+            # define common EEG label from the 10-10 convention
+            COMMON_EEG_label = r'Fp1|Fpz|Fp2|AF7||AF3|AFz|AF4|AF8|F7|F5|F3|F1|Fz|F2|F4|F6|F8|FT7|FC5|FC3|FC1|FCz|FC2|FC4|FC6|FT8|T7|C5|C3|C1|Cz|C2|C4|C6|T8|TP7|CP5|CP3|CP1|CPz|CP2|CP4|CP6|TP8|P7|P5|P3|P1|Pz|P2|P4|P6|P8|PO7|PO5|PO3|POz|PO4|PO6|PO8|O1|Oz|O2|M1|M2|EEG'
             # select only EEG channels and return a warning if the number of participant is smaller/higher
-            mask_ch = df['transducer_type'].str.contains(r'EEG|AGAGCL ELECTRODE', case = False, na=False) # create a mask that returns true for lines containing either EEG/AGAGCL ELECTRODE in the transducer_type column
+            mask_ch = df['transducer_type'].str.contains(r'EEG|AGAGCL ELECTRODE', case = False, na=False) | df['channel'].str.contains(COMMON_EEG_label, case = False, na=False) # create a mask that returns true for lines containing either EEG/AGAGCL ELECTRODE in the transducer_type column or containing a common EEG label in the channel column
             df_ch = df[mask_ch]
             # remove the emg channels that were captured with the AGAGCL ELECTRODE transducer type 
             df_ch = df_ch[~df_ch['channel'].str.contains(r'emg|ecg|eog', case=False, na=False)] # the ~ allows to not select the selection (like ! in matlab)
