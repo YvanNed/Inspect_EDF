@@ -308,6 +308,7 @@ sfreq = raw_badsout.info['sfreq']
 n_samples = raw_badsout.n_times
 n_samples_to_keep = int(np.floor(n_samples / sfreq) * sfreq)
 raw_badsout.crop(tmin=0, tmax=(n_samples_to_keep - 1) / sfreq)
+raw_badsout._data = raw_badsout._data.astype('float32')
 
 #%% export to .edf
 mne.export.export_raw(os.path.join(folder_path, "STS_Sleep06_drauto.edf"), raw, fmt='edf', physical_range='auto', add_ch_type=False, overwrite=True, verbose=None)
@@ -367,7 +368,7 @@ raw_edf_exceedYES = mne.io.read_raw_edf(os.path.join(folder_path, "STS_Sleep06_e
 
 raw_edf_badsout = mne.io.read_raw_edf(os.path.join(folder_path, "STS_Sleep06_badsout.edf"), preload = True)
 
-raw_badsout = mne.io.read_raw_edf(os.path.join(folder_path, "STS_Sleep06_badsout_crop.edf"), preload = True)
+raw_edf_badsout_crop = mne.io.read_raw_edf(os.path.join(folder_path, "STS_Sleep06_badsout_crop.edf"), preload = True)
 # raw_edf_dr65536 = mne.io.read_raw_edf(f"{folder_path}\STS_Sleep06_dr65536.edf", preload = True)
 # dr65536_psd = raw_edf_dr65536.compute_psd()
 # dr65536_data = raw_edf_dr65536.get_data()
