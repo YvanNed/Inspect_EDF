@@ -372,7 +372,7 @@ with open(f"{summary_path}/EDF_inspection_report.html", "w", encoding="utf-8") a
     ###########################################################################
     # extract EEG info
     # define common EEG label from the 10-10 convention
-    COMMON_EEG_label = r'Fp1|Fpz|Fp2|AF7||AF3|AFz|AF4|AF8|F7|F5|F3|F1|Fz|F2|F4|F6|F8|FT7|FC5|FC3|FC1|FCz|FC2|FC4|FC6|FT8|T7|C5|C3|C1|Cz|C2|C4|C6|T8|TP7|CP5|CP3|CP1|CPz|CP2|CP4|CP6|TP8|P7|P5|P3|P1|Pz|P2|P4|P6|P8|PO7|PO5|PO3|POz|PO4|PO6|PO8|O1|Oz|O2|M1|M2|EEG'
+    COMMON_EEG_label = r'\bFp1\b|\bFpz\b|\bFp2\b|\bAF7\b|\bAF3\b|\bAFz\b|\bAF4\b|\bAF8\b|\bF7\b|\bF5\b|\bF3\b|\bF1\b|\bFz\b|\bF2\b|\bF4\b|\bF6\b|\bF8\b|\bFT7\b|\bFC5\b|\bFC3\b|\bFC1\b|\bFCz\b|\bFC2\b|\bFC4\b|\bFC6\b|\bFT8\b|\bT7\b|\bC5\b|\bC3\b|\bC1\b|\bCz\b|\bC2\b|\bC4\b|\bC6\b|\bT8\b|\bTP7\b|\bCP5\b|\bCP3\b|\bCP1\b|\bCPz\b|\bCP2\b|\bCP4\b|\bCP6\b|\bTP8\b|\bP7\b|\bP5\b|\bP3\b|\bP1\b|\bPz\b|\bP2\b|\bP4\b|\bP6\b|\bP8\b|\bPO7\b|\bPO5\b|\bPO3\b|\bPOz\b|\bPO4\b|\bPO6\b|\bPO8\b|\bO1\b|\bOz\b|\bO2\b|\bM1\b|\bM2\b|EEG'
     # select only EEG channels and return a warning if the number of participant is smaller/higher
     mask_ch = df_full['transducer_type'].str.contains(r'EEG|AGAGCL ELECTRODE', case = False, na=False) | df_full['channel'].str.contains(COMMON_EEG_label, case = False, na=False) # create a mask that returns true for lines containing either EEG/AGAGCL ELECTRODE in the transducer_type column or containing a common EEG label in the channel column
     df_full_ch = df_full[mask_ch]
